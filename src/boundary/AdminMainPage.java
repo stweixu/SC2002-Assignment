@@ -143,12 +143,13 @@ public static void displayStaff() {
 
 public static void addStaff(){
 	
+	sc.nextLine();
 	System.out.println("New Staff Username: ");
-	String newName = sc.next();
+	String newName = sc.nextLine();
 	
 	String newLoginID;	
 		System.out.println("New Staff Login ID: ");
-		newLoginID = sc.next();
+		newLoginID = sc.nextLine();
 		
 	
 	System.out.println("New Staff's role (1 or 2):\n"
