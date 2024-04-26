@@ -3,7 +3,6 @@ package control.admin;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-
 import entity.Staff;
 import entity.User;
 import exception.AddStaffException;
@@ -14,7 +13,19 @@ import entity.Branch;
 import entity.Company;
 import control.ExcelRW;
 
+/**
+ * ManpowerController manages the entire staff list 
+ * for Admin user purposes. 
+ * Includes 
+ * Displaying of staff list
+ * Adding & removing of staff from Excel file
+ */
+
 public class ManpowerController {
+	
+	/**
+	 * Display staff list of whole company, filtered by their branch
+	 */
 	
 	public static void displayStaffByBranch() {
 		System.out.println("Filtered by Branch");
@@ -38,6 +49,10 @@ public class ManpowerController {
 			System.out.println("");
 		}
 	}
+	
+	/**
+	 * Display staff list of whole company, filtered by their role
+	 */
 	
 	public static void displayStaffByRole() {
 		System.out.println("Filtered by Role");
@@ -94,6 +109,10 @@ public class ManpowerController {
 		System.out.println("");
 	}
 	
+	/**
+	 * Display staff list of whole company, filtered by their gender
+	 */
+	
 	public static void displayStaffByGender() {
 		
 		String[] genderArray = {"M", "F"};
@@ -137,6 +156,9 @@ public class ManpowerController {
 		}
 	}
 	
+	/**
+	 * Display staff list of whole company, filtered by their age in ascending order
+	 */
 	@SuppressWarnings("unchecked")
 	public static void displayStaffByAge() {
 		
@@ -186,6 +208,14 @@ public class ManpowerController {
 		}
 			System.out.println("");
 	}
+	
+	/**
+	 * Add new staff to branch and Excel file
+	 * @param staff
+	 * @param branch
+	 * @throws StaffExistedException if staff login id already exists
+	 * @throws AddStaffException if staff quota is reached
+	 */
     
     public static void addStaff(Staff staff, Branch branch) throws StaffExistedException, AddStaffException{
         ArrayList<Staff> temStaffs = branch.getStaffList();
@@ -237,6 +267,11 @@ public class ManpowerController {
 
     }
 
+    
+    /**
+     * Remove staff from branch and Excel file
+     * @param staff
+     */
     public static void deleteStaff(Staff staff){
 
         String branchName = staff.getBranchName();

@@ -11,8 +11,19 @@ import exception.BranchNotExistException;
 import exception.CloseBranchException;
 import control.ExcelRW;
 
+/**
+ * Controls the opening and closing of branches
+ * by adding or removing from HashMap<String branchName, branch Branch>
+ */
+
 public class BranchOperationController {
     
+	/**
+	 * Add new branch object into HashMap that records all Branch
+	 * @param new branch
+	 * @throws BranchExistedException if duplicate name
+	 */
+	
     public static void openBranch(Branch branch) throws BranchExistedException {
         HashMap<String, Branch> temBranches = Company.getBranch();
 
@@ -37,6 +48,13 @@ public class BranchOperationController {
         ExcelRW.writeFile(table, "data/default_branch_list.xlsx",3);
     }
 
+    
+    /**
+     * Remove branch from HashMap that records all Branch
+     * @param branch to be closed
+     * @throws CloseBranchException if there are staff yet to be removed/transferred
+     */
+    
     public static void closeBranch(Branch branch) throws CloseBranchException{
         
         HashMap<String, Branch> temBranches = Company.getBranch();

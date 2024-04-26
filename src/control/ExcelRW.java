@@ -8,7 +8,18 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class for reading and writing to our Excel files
+ */
+
 public class ExcelRW {
+	
+	/**
+	 * Read from Excel file to create instantiate objects
+	 * @param pathName of Excel file
+	 * @param noOfCols - number of columns in excel file to read
+	 * @return
+	 */
 	public static ArrayList<Object[]> readFile(String pathName, int noOfCols) {
 		try {
 			FileInputStream file = new FileInputStream(pathName);
@@ -48,6 +59,14 @@ public class ExcelRW {
 	    }
 	}
 	
+	
+	/**
+	 * Write new data to Excel file
+	 * @param table - Updated table to overwrite old table in Excel
+	 * @param pathName of Excel file
+	 * @param noOfCol - number of columns
+	 * @return true if successfully written to file
+	 */
 	public static boolean writeFile(ArrayList<Object[]> table, String pathName, int noOfCol) {		
 		try {
 			FileInputStream fin = new FileInputStream(pathName);
@@ -83,6 +102,12 @@ public class ExcelRW {
 	    	return false;
 	    }
 	}
+	
+	/**
+	 * Check for empty rows
+	 * @param row
+	 * @return true if empty
+	 */
 	
 	public static boolean isRowEmpty(Row row) {
         if (row == null || row.getLastCellNum() <= 0) {

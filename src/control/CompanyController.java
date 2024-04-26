@@ -13,6 +13,12 @@ import entity.Role;
 import entity.MenuItem;
 import entity.MenuCategory;
 
+/**
+ * CompanyController read data from excel file and 
+ * instantiates a Company object during run-time 
+ * by calling CompanyController.initialise
+ */
+
 public class CompanyController {
 
     private static void loadBranch(){
@@ -129,8 +135,12 @@ public class CompanyController {
     public static void displayBranch() {
     	
     	HashMap<String, Branch> branchList = Company.getBranch();
+    	
+    	System.out.println("\n----Branch----");
     	for (String branchKey : branchList.keySet()) {
     		System.out.println(branchKey);
     	}
+    	
+    	System.out.print("---------------");
     }
 }

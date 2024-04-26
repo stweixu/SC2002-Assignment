@@ -6,8 +6,19 @@ import entity.User;
 import exception.StaffNotExistException;
 import exception.WrongPasswordException;
 
+/*
+ * AccountController checks for
+ * correct login credentials
+ * 
+ */
+
 public class AccountController {
 	
+	/**
+	 * 
+	 * @param loginID given by user
+	 * @return user object if loginID exists
+	 */
 	public static User checkExisting(String loginID) throws StaffNotExistException {
 		
 		for (User user: Company.getAdmin()) {
@@ -28,6 +39,12 @@ public class AccountController {
 		throw new StaffNotExistException();
 	}
 
+	/**
+	 * 
+	 * @param user object from loginID entered by user
+	 * @param password entered by user
+	 * @return true if password matches
+	 */
     public static boolean checkValid(User user, String password) throws WrongPasswordException{
         if (user.getPassword().equals(password)) 
         	return true;

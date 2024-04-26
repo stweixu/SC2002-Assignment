@@ -13,13 +13,12 @@ import entity.Staff;
 import entity.User;
 import exception.*;
 
+
 public class AdminMainPage {
 	
 	static Scanner sc = new Scanner(System.in);
 	
 	
-//class methods below
-	//AdminUI is Command Line Interface
 public static void AdminUI(User user){
 	
 	System.out.println("-----Admin-----");
@@ -163,7 +162,7 @@ public static void addStaff(){
 	else if (roleChoice == 2)
 	{staffRole = Role.MANAGER;}
 	
-	System.out.println("New Staff's age (integer):\n");
+	System.out.println("New Staff's age (integer):");
 	int staffAge = sc.nextInt();
 	
 	System.out.println("New Staff's gender (M/F): ");

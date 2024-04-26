@@ -2,6 +2,7 @@ package boundary;
 
 import java.util.*;
 
+
 import entity.Company;
 import entity.User;
 import exception.AddStaffException;
@@ -15,8 +16,6 @@ import control.CompanyController;
 import entity.Admin;
 import entity.Staff;
 
-//import StaffMainPage;
-//import ManpowerUtility;
 
 public class EmployeeLogin {
 	
@@ -32,6 +31,7 @@ public static void employeeLoginUI(){
 		String loginID = enterLoginID();
 		String password = enterPassword();
 		
+		//Returns Admin or Staff object if ID and password matches
 		user = checkValid(loginID, password);
 		
 		if (user == null) {
@@ -56,7 +56,7 @@ public static void employeeLoginUI(){
 	if (user instanceof Staff) {
 		Staff staffUser = (Staff) user; 
 		
-		switch(staffUser.getRole()) { //need to add getRole in StaffController class?
+		switch(staffUser.getRole()) {
 			case STAFF:
 				StaffMainPage.StaffUI(staffUser);
 				break;
