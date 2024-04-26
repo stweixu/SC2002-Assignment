@@ -17,7 +17,13 @@ import exception.OrderException;
 public class OrderCreationController{
   
   private static int id = 100;
-  
+
+	/**
+     * createOrder() creates new order in a branch
+     * @param branchName The branch to add the order in String
+     * @param takeaway Whether customer chose takeaway option in boolean
+     * @return orderID in String
+     */
   public static String createOrder(String branchName, boolean takeaway) {
     try {
       Branch branch = Company.getBranch().get(branchName);
@@ -37,7 +43,16 @@ public class OrderCreationController{
       return null;
     }
   }
-  
+
+	/**
+     * addToOrder() add new item to the order
+     * @param branchName The branch to add to the order in String
+     * @param orderID The orderID to add to the order in String
+     * @param index The index of item in the menu to add to the order in int
+     * @param quantity The quantity of item to add to the order in int
+     * @param remarks The remarks of item to add to the order in String
+     * @return void
+     */
   public static void addToOrder(String branchName, String orderID, int index, int quantity, String remarks) {
     
     try {          
@@ -103,7 +118,14 @@ public class OrderCreationController{
       System.out.println(e.getMessage());
     }
   }
-  
+
+	/**
+     * deleteFromOrder() delete item to the order
+     * @param branchName The branch to add to the order in String
+     * @param orderID The orderID to add to the order in String
+     * @param index The index of item in the menu to add to the order in int
+     * @return void
+     */
   public static void deleteFromOrder(String branchName, String orderID, int index){
 	    try {
 	      Branch branch = Company.getBranch().get(branchName);
