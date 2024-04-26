@@ -7,6 +7,11 @@ import exception.StaffNotExistException;
 import exception.WrongPasswordException;
 
 public class AccountController {
+	/**
+     * checkExisting() checks if the loginID exists in the company's databse
+     * @param loginID The loginID to check against
+     * @return User object that matches the loginID.
+     */
 
 	// Check if user account exists in the system
 	public static User checkExisting(String loginID) throws StaffNotExistException {
@@ -31,7 +36,12 @@ public class AccountController {
 		throw new StaffNotExistException();
 	}
 
-	// Verify if the password is valid
+	/**
+     * checkValid() checks if the user's password is valid
+     * @param user The user account to check
+     * @param password The password to verify
+     * @return boolean
+     */
     public static boolean checkValid(User user, String password) throws WrongPasswordException{
         if (user.getPassword().equals(password)) 	
         	return true;
