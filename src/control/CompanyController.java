@@ -50,6 +50,7 @@ public class CompanyController {
                 Branch temBranch;
                 HashMap<String,Branch> temBranches = Company.getBranch();
 
+                // iterate through staff_list and add new staff members to the database (Branch)
                 for (Map.Entry<String,Branch> e : temBranches.entrySet()){
                     if (e.getKey().equals(staffRead.get(i)[5])){
                         temBranch = e.getValue();
@@ -105,6 +106,7 @@ public class CompanyController {
             Branch temBranch;
             HashMap<String,Branch> temBranches = Company.getBranch();
 
+            // iterate through menu_list and add new menu items to the database (Branch)
             for (Map.Entry<String,Branch> e : temBranches.entrySet()){
                 if (e.getKey().equals(menuRead.get(i)[2])){
                     temBranch = e.getValue();
