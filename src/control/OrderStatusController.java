@@ -13,6 +13,13 @@ import exception.BranchNotExistException;
 import exception.OrderException;
 
 public class OrderStatusController implements OrderProcessingInterface, OrderCollectionInterface, OrderCheckOutInterface{
+     /**
+     * Only Staff can use processOrder() method to update the status of the 
+       processed order from a new order to be “Ready to pickup"
+     * @param branchName The specific branch where the order came from in String.
+     * @param id The specific order's ID in String.
+     * @return void.
+     */
 	
 	public void processOrder(String branchName, String id) {
 		try {
@@ -38,7 +45,12 @@ public class OrderStatusController implements OrderProcessingInterface, OrderCol
 			System.out.println(e.getMessage());
 		}
 	}
-	
+     /**
+     * Orders are automatically canceled and removed from the " ready to pickup" 
+       list if not picked up within a 100s timeframe
+     * @param branchName The specific branch where the order came from in String.
+     * @return void.
+     */
 	public static void cancelOrder(String branchName) {
 		try {
 			Branch branch = Company.getBranch().get(branchName);
@@ -65,6 +77,13 @@ public class OrderStatusController implements OrderProcessingInterface, OrderCol
 		}
 	}
 	
+     /**
+     * Customer can collect food after the order status becomes “ready to 
+        pickup by using the collectOrder() method to change the status to "Completed"
+     * @param branchName The specific branch where the order came from in String.
+     * @param id The specific order's ID in String.
+     * @return void.
+     */
 	public void collectOrder(String branchName, String id){
 		try {
 			OrderStatusController.cancelOrder(branchName);
@@ -95,6 +114,13 @@ public class OrderStatusController implements OrderProcessingInterface, OrderCol
 			System.out.println(e.getMessage());
 		}
 	}
+     /**
+     * Customer can checkout their cart after finishing order by using the checkOut() method
+     * @param branchName The specific branch where the order came from in String.
+     * @param id The specific order's ID in String.
+     * @param paid Return true if customer has made payment, otherwise return false 
+     * @return void.
+     */
 	
 	public void checkOut(String branchName, String id, boolean paid){
 		
