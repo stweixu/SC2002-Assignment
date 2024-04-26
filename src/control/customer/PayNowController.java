@@ -11,6 +11,11 @@ public class PayNowController extends PaymentController{
 	public PayNowController(String phoneNo) {
 		this.phoneNo = phoneNo;
 	}
+	/**
+     * processPayNowPayment() process PayNow payment method for customer
+     * @param total The total amount to pay
+     * @return boolean
+     */
 	
 	public boolean processPayNowPayment(double total) {
 		
