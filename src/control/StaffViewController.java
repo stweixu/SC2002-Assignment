@@ -7,6 +7,12 @@ import entity.Company;
 import entity.Staff;
 
 public class StaffViewController {
+
+	/**
+     * displayStaffList() displays list of staffs in a specific branch
+     * @param branchName The name of the branch to lookup in String
+     * @return void.
+     */
 	public static void displayStaffList(String branchName) {
 		
 		Branch branch = Company.getBranch().get(branchName);	// retrieve the branch from the company
