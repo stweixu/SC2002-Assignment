@@ -20,6 +20,10 @@ import entity.MenuCategory;
  */
 
 public class CompanyController {
+    /**
+     * loadBranch() Loads the list of branches in the excel sheet into the company's databse
+     * @return void.
+     */
 
     private static void loadBranch(){
         // read data from branch_list.xlsx
@@ -35,6 +39,10 @@ public class CompanyController {
         Company.setBranch(branches);
     }
 
+    /**
+     * loadStaff() Loads the list of staffs in the excel sheet into the company's branch databse
+     * @return void.
+     */
     private static void loadStaff(){
         // read data from staff_list.xlsx
         ArrayList<Object[]> staffRead = ExcelRW.readFile("data/default_staff_list.xlsx", 6);
@@ -56,6 +64,7 @@ public class CompanyController {
                 Branch temBranch;
                 HashMap<String,Branch> temBranches = Company.getBranch();
 
+                // iterate through staff_list and add new staff members to the database (Branch)
                 for (Map.Entry<String,Branch> e : temBranches.entrySet()){
                     if (e.getKey().equals(staffRead.get(i)[5])){
                         temBranch = e.getValue();
@@ -76,6 +85,10 @@ public class CompanyController {
         }
     }
 
+     /**
+     * loadMenu() Loads the list of menu items in the excel sheet into the company's branch databse
+     * @return void.
+     */
     private static void loadMenu(){
         // read data from menu_list.xlsx
         ArrayList<Object[]> menuRead = ExcelRW.readFile("data/default_menu_list.xlsx", 4);
@@ -102,7 +115,7 @@ public class CompanyController {
                     Category = MenuCategory.DRINK;
                     break;
                 
-                default: // throw shit
+                default: 
                     break;
             }
 
@@ -111,6 +124,7 @@ public class CompanyController {
             Branch temBranch;
             HashMap<String,Branch> temBranches = Company.getBranch();
 
+            // iterate through menu_list and add new menu items to the database (Branch)
             for (Map.Entry<String,Branch> e : temBranches.entrySet()){
                 if (e.getKey().equals(menuRead.get(i)[2])){
                     temBranch = e.getValue();
@@ -125,13 +139,20 @@ public class CompanyController {
         }
     }
 
-    // call Company.initialise() to initialise the database
+     /**
+     * initialise() Loads the excel files containing the list of branches, staffs, and menu items into the company's database
+     * @return void.
+     */
     public static void initialise(){
-        loadBranch();
+        loadBranch();    
         loadStaff();
         loadMenu();
     }
-
+    
+/**
+     * displayBranch() Displays the list of branches in the company's database
+     * @return void.
+     */
     public static void displayBranch() {
     	
     	HashMap<String, Branch> branchList = Company.getBranch();

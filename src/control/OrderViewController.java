@@ -12,6 +12,12 @@ import entity.OrderItem;
 import exception.OrderException;
 
 public class OrderViewController implements CustomerViewInterface, StaffViewInterface{
+     /**
+     * viewOrderStatus() is to print out the status of the current order 
+     * @param branchName The specific branch where the order came from in String.
+     * @param id The specific order's ID in String.
+     * @return void.
+     */
   public void viewOrderStatus(String branchName, String orderID) {
     try {
     	OrderStatusController.cancelOrder(branchName);
@@ -27,7 +33,13 @@ public class OrderViewController implements CustomerViewInterface, StaffViewInte
       System.out.println(e.getMessage());
     }
   }
-  
+     /**
+     * viewOrderDetails() is to print out the details of a specific order such as its OrderID, Status, takeaway/dine-in
+     names of the ordered items, quantity of the ordered items and the total price of the order
+     * @param branchName The specific branch where the order came from in String.
+     * @param id The specific order's ID in String.
+     * @return the total price of the order.
+     */
   public double viewOrderDetails(String branchName, String orderID) {
     try {
     	OrderStatusController.cancelOrder(branchName);
@@ -66,7 +78,12 @@ public class OrderViewController implements CustomerViewInterface, StaffViewInte
       return 0;
     }
   }
-  
+
+     /**
+     * viewNewOrders() is to print out list of orders that are of status "NEW" in a specific branch
+     * @param branchName The specific branch where the order came from in String
+     * @return void.
+     */
   public void viewNewOrders(String branchName) {
       try {
         HashMap<String, Order> orderList = Company.getBranch().get(branchName).getOrders();

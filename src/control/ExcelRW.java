@@ -13,113 +13,127 @@ import java.util.ArrayList;
  */
 
 public class ExcelRW {
-	
 	/**
-	 * Read from Excel file to create instantiate objects
-	 * @param pathName of Excel file
-	 * @param noOfCols - number of columns in excel file to read
-	 * @return
+	 * readFile() reads the excel file specified by the path name
+	 * 
+	 * @param pathName the path of the file
+	 * @param noOfCols number of columns to read
+	 * @return ArrayList<Object[]>.
 	 */
+
 	public static ArrayList<Object[]> readFile(String pathName, int noOfCols) {
 		try {
-			FileInputStream file = new FileInputStream(pathName);
-	        Workbook workbook = new XSSFWorkbook(file);
-	        Sheet sheet = workbook.getSheetAt(0);
-	        
-	        ArrayList<Object[]> entry = new ArrayList<Object[]>();
-	        
-	        for (Row row : sheet) {
-	            if (isRowEmpty(row))	break;
+			FileInputStream file = new FileInputStream(pathName); // Create an input stream for the pathName
+			Workbook workbook = new XSSFWorkbook(file); // Create a new workbook object based on the input stream
+			Sheet sheet = workbook.getSheetAt(0); // Get the first sheet of the excel file. We assume that the excel
+													// file read only has 1 sheet
 
-	            Object[] colValue = new Object[noOfCols];
-	            
-	            for (int i=0; i<noOfCols; i++) {
-	            	Cell cell = row.getCell(i);
-	                switch (cell.getCellType()) {
-	                    case STRING:
-	                    	colValue[i] = cell.getStringCellValue();
-	                        break;
-	                    case NUMERIC:
-	                        colValue[i] = cell.getNumericCellValue();
-	                        break;
-	                    default:
-	                    	colValue[i] = "-";
-	                }
-	            }
-	            entry.add(colValue);
-	        }
-	        
-	        workbook.close();
-            file.close();
-            
-            return entry;
-		} catch (IOException e) {
-	    	System.out.println("Failed to open file!");
-	    	return null;
-	    }
-	}
-	
-	
-	/**
-	 * Write new data to Excel file
-	 * @param table - Updated table to overwrite old table in Excel
-	 * @param pathName of Excel file
-	 * @param noOfCol - number of columns
-	 * @return true if successfully written to file
-	 */
-	public static boolean writeFile(ArrayList<Object[]> table, String pathName, int noOfCol) {		
-		try {
-			FileInputStream fin = new FileInputStream(pathName);
-			Workbook workbook = WorkbookFactory.create(fin);		
-			Sheet sheet = workbook.createSheet();
-			workbook.removeSheetAt(0);
-			
-			int size = table.size();
-			
-			// Create row and write data
-			for (int i=0; i<size; i++) {
-	    		Object[] col = table.get(i);
-	    		Row row = sheet.createRow(sheet.getLastRowNum() + 1);
-	    		
-	    		for (int j=0; j<noOfCol; j++) {
-	    			Cell cell = row.createCell(j);
-	    			if (col[j] instanceof Double)	cell.setCellValue((Double) col[j]);
-	    			else	cell.setCellValue((String) col[j]);
-	    		}
-	    	}
-            
-            fin.close();
-           
-            FileOutputStream fout = new FileOutputStream(pathName);
-            workbook.write(fout);
-            fout.close();
+			// Creates 2D array (rows dynamic, cols defined by noOfCols) to store excel
+			// entries
+			ArrayList<Object[]> entry = new ArrayList<Object[]>(); // Create placeholder for the rows
+
+			// Iterate the rows
+			for (Row row : sheet) {
+				if (isRowEmpty(row))
+					break; // Exit if no more rows to read
+
+				Object[] colValue = new Object[noOfCols]; // Create placeholder for columns
+
+				// Iterate the columns
+				for (int i = 0; i < noOfCols; i++) {
+					Cell cell = row.getCell(i);
+					switch (cell.getCellType()) {
+						case STRING:
+							colValue[i] = cell.getStringCellValue();
+							break;
+						case NUMERIC:
+							colValue[i] = cell.getNumericCellValue();
+							break;
+						default:
+							colValue[i] = "-";
+					}
+				}
+				entry.add(colValue); // update cells read to the placeholder
+			}
+
+			// Close the workbook and input stream when done
 			workbook.close();
-            
-            System.out.println("Successfully written to file!");
-            return true;
+			file.close();
+
+			return entry;
 		} catch (IOException e) {
-	    	System.out.println("Failed to write to file!");
-	    	return false;
-	    }
+			System.out.println("Failed to open file!");
+			return null;
+		}
 	}
-	
+
 	/**
-	 * Check for empty rows
-	 * @param row
-	 * @return true if empty
+	 * writeFile() writes to the excel file specified by the path name
+	 * 
+	 * @param table    the 2D array of entries to write to the excel file
+	 * @param pathName the path of the file
+	 * @param noOfCol  number of columns to write
+	 * @return boolean.
 	 */
-	
+	public static boolean writeFile(ArrayList<Object[]> table, String pathName, int noOfCol) {
+		try {
+			FileInputStream fin = new FileInputStream(pathName); // Create an input stream for the pathName
+			Workbook workbook = WorkbookFactory.create(fin); // Create a new workbook object based on the input stream
+			Sheet sheet = workbook.createSheet(); // Create new sheet for the excel file
+			workbook.removeSheetAt(0); // Remove existing sheet
+
+			int size = table.size();
+
+			// Create row and write data
+			for (int i = 0; i < size; i++) {
+				Object[] col = table.get(i);
+				Row row = sheet.createRow(sheet.getLastRowNum() + 1);
+
+				for (int j = 0; j < noOfCol; j++) {
+					Cell cell = row.createCell(j);
+					if (col[j] instanceof Double)
+						cell.setCellValue((Double) col[j]);
+					else
+						cell.setCellValue((String) col[j]);
+				}
+			}
+
+			fin.close(); // Close input stream when done
+
+			// Create output stream and write table entries to excel file
+			FileOutputStream fout = new FileOutputStream(pathName);
+			workbook.write(fout);
+
+			// Close output stream and workbook when done
+			fout.close();
+			workbook.close();
+
+			System.out.println("Successfully written to file!");
+			return true;
+		} catch (IOException e) {
+			System.out.println("Failed to write to file!");
+			return false;
+		}
+	}
+
+	/**
+	 * isRowEmpty() checks if the current row in the excel file is empty, for
+	 * terminating read operations
+	 * 
+	 * @param row Current row number in the read operation
+	 * @return boolean.
+	 */
 	public static boolean isRowEmpty(Row row) {
-        if (row == null || row.getLastCellNum() <= 0) {
-            return true;
-        }
-        for (int cellNum = row.getFirstCellNum(); cellNum < row.getLastCellNum(); cellNum++) {
-            Cell cell = row.getCell(cellNum);
-            if (cell != null && cell.getCellType() != CellType.BLANK && cell.getCellType() != CellType._NONE) {
-                return false;
-            }
-        }
-        return true;
-    }
-	
+		if (row == null || row.getLastCellNum() <= 0) {
+			return true;
+		}
+		for (int cellNum = row.getFirstCellNum(); cellNum < row.getLastCellNum(); cellNum++) {
+			Cell cell = row.getCell(cellNum);
+			if (cell != null && cell.getCellType() != CellType.BLANK && cell.getCellType() != CellType._NONE) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

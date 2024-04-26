@@ -9,6 +9,12 @@ import exception.BranchNotExistException;
 import exception.MenuException;
 
 public class MenuViewController {
+
+     /**
+     * displayMenu() is to print out the menu items in a specific branch
+     * @param branchName The specific branch where the order came from in String.
+     * @return void.
+     */
 	public static void displayMenu(String branchName) {
 
 		try {
