@@ -9,6 +9,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class ExcelRW {
+/**
+     * readFile() reads the excel file specified by the path name
+     * @param pathName the path of the file
+     *	@param noOfCols number of columns to read
+     * @return ArrayList<Object[]>.
+     */
+	
 	public static ArrayList<Object[]> readFile(String pathName, int noOfCols) {
 		try {
 			FileInputStream file = new FileInputStream(pathName);	// Create an input stream for the pathName
@@ -51,7 +58,14 @@ public class ExcelRW {
 	    	return null;
 	    }
 	}
-	
+
+	/**
+     * writeFile() writes to the excel file specified by the path name
+     * @param table the 2D array of entries to write to the excel file
+     * @param pathName the path of the file
+     *	@param noOfCol number of columns to write
+     * @return boolean.
+     */
 	public static boolean writeFile(ArrayList<Object[]> table, String pathName, int noOfCol) {		
 		try {
 			FileInputStream fin = new FileInputStream(pathName);	// Create an input stream for the pathName
@@ -91,7 +105,11 @@ public class ExcelRW {
 	    }
 	}
 
-	// Checks whether a row in the excel sheet is empty. Used to stop reads when no more rows to read
+	/**
+     * isRowEmpty() checks if the current row in the excel file is empty, for terminating read operations
+     *	@param row Current row number in the read operation
+     * @return boolean.
+     */
 	public static boolean isRowEmpty(Row row) {
         if (row == null || row.getLastCellNum() <= 0) {
             return true;
