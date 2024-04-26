@@ -11,7 +11,12 @@ public class CreditCardController extends PaymentController{
 	public CreditCardController(String cardNo) {
 		this.cardNo = cardNo;
 	}
-	
+
+	/**
+     * processCardPayment() process card payment method for customer
+     * @param total The total amount to pay
+     * @return boolean
+     */
 	public boolean processCardPayment(double total) {
 		
 		Scanner sc = new Scanner(System.in);
