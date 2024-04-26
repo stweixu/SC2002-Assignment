@@ -5,6 +5,13 @@ import java.util.Scanner;
 import entity.Company;
 
 public class CashController extends PaymentController{
+
+	/**
+     * processCashPayment() process cash payment method for customer
+     * @param total The total amount to pay
+     * @return boolean
+     */
+
 	public boolean processCashPayment(double total) {
 		
 		Scanner sc = new Scanner(System.in);
