@@ -14,6 +14,13 @@ public class Branch {
   private ArrayList<MenuItem> menuItems;
   private HashMap<String, Order> orders;
   
+
+  /**
+     * Branch contructor 
+     * @param branchName Name of Branch.
+     * @param location location of Branch.
+     * @return void.
+     */
   public Branch(String branchName, String location) {
         this.branchName = branchName;
         this.location = location;
@@ -23,7 +30,13 @@ public class Branch {
         this.menuItems = new ArrayList<>();
         this.orders = new HashMap<String, Order>();
     }
-  
+  /**
+     * Branch contructor 
+     * @param branchName Name of Branch.
+     * @param location location of Branch.
+     * @param staffQuota staff quota of Branch.
+     * @return void.
+     */
   public Branch(String branchName, String location, int staffQuota) {
         this.branchName = branchName;
         this.location = location;
@@ -34,14 +47,28 @@ public class Branch {
         this.orders = new HashMap<String, Order>();
     }
 
+    /**
+     * To get staff's list
+     * @return the staff's list.
+     */
     public ArrayList<Staff> getStaffList() {
     return staffList;
   }
 
+    /**
+     * To set staff's list
+     * @param staffList The new staff's list to set
+     * @return void.
+     */
   public void setStaffList(ArrayList<Staff> staffList) {
     this.staffList = staffList;
   }
 
+    /**
+     * To get Branch's name
+     * @param staffList The Branch's name
+     * @return the Branch's name.
+     */
   public String getBranchName() {
         return branchName;
     }
