@@ -96,7 +96,7 @@ public class CompanyController {
                     Category = MenuCategory.DRINK;
                     break;
                 
-                default: // throw shit
+                default: 
                     break;
             }
 
@@ -121,11 +121,12 @@ public class CompanyController {
 
     // call Company.initialise() to initialise the database
     public static void initialise(){
-        loadBranch();
+        loadBranch();    
         loadStaff();
         loadMenu();
     }
 
+    // Display list of branches in the company
     public static void displayBranch() {
     	
     	HashMap<String, Branch> branchList = Company.getBranch();
