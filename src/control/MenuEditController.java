@@ -15,7 +15,14 @@ import exception.MenuException;
 public class MenuEditController {
   private static final String pathName = "data/default_menu_list.xlsx";
 
-// add menu item to branch
+/**
+     * addMenuItem() is to add new menu items in a specific branch
+     * @param branchName The specific branch to add the menu item to in String.
+     * @param name The name of the menu item in String.
+     * @param price The price of the menu item in double.
+     * @param option The index of category of the menu item in int.
+     * @return void.
+     */
   public static void addMenuItem(String branchName, String name, double price, int option) {
     try {
       Branch branch = Company.getBranch().get(branchName);	// retrieve the branch
@@ -56,7 +63,13 @@ public class MenuEditController {
     }
   }
 
-	// edit branch menu item by name
+	/**
+     * editMenuItemName()  is to edit menu items in a specific branch by name
+     * @param branchName The specific branch to edit the menu item from in String.
+     * @param index The index of the menu item to edit in int.
+     * @param name The name of the menu item in String.
+     * @return void.
+     */
   public static void editMenuItemName(String branchName, int index, String name) {
 	    try {
 	      Branch branch = Company.getBranch().get(branchName);	// retrieve the branch
@@ -115,7 +128,13 @@ public class MenuEditController {
 	    }
 	  }
 
-  // edit branch menu item by price
+  /**
+     * editMenuItemPrice()  is to edit menu items in a specific branch by price
+     * @param branchName The specific branch to edit the menu item from in String.
+     * @param index The index of the menu item to edit in int.
+     * @param price The new price of the menu item in double.
+     * @return void.
+     */
   public static void editMenuItemPrice(String branchName, int index, double price) {
 	    try {
 	      Branch branch = Company.getBranch().get(branchName);	// retrieve the branch
@@ -166,7 +185,13 @@ public class MenuEditController {
 	    }
 	  }
 
-// edit branch menu item by category
+/**
+     * editMenuItemCategory()  is to edit menu items in a specific branch by category
+     * @param branchName The specific branch to edit the menu item from in String.
+     * @param index The index of the menu item to edit in int.
+     * @param option The index of the menu's new category in int
+     * @return void.
+     */
   public static void editMenuItemCategory(String branchName, int index, int option) {
 	    try {
 	      Branch branch = Company.getBranch().get(branchName);	// retrieve the branch
@@ -217,7 +242,12 @@ public class MenuEditController {
 	    }
 	  }
 
-  // remove menu item from branch
+  /**
+     * removeMenuItem()  is to remove menu items in a specific branch
+     * @param branchName The specific branch to remove the menu item from in String.
+     * @param index The index of the menu item to edit in int.
+     * @return void.
+     */
   public static void removeMenuItem(String branchName, int index) {
 	    try {
 	      Branch branch = Company.getBranch().get(branchName);	// retrieve the branch
