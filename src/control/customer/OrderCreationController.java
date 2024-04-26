@@ -84,7 +84,16 @@ public class OrderCreationController{
       System.out.println(e.getMessage());
     }
   }
-  
+	
+  /**
+     * editOrder() edit item in the order
+     * @param branchName The branch to edit the order in String
+     * @param orderID The orderID to edit the order in String
+     * @param index The index of item in the menu to edit to the order in int
+     * @param quantity The quantity of item to edit to the order in int
+     * @param remarks The remarks of item to edit to the order in String
+     * @return void
+     */
   public static void editOrder(String branchName, String orderID, int index, int quantity, String remarks) {
     try {
       Branch branch = Company.getBranch().get(branchName);
