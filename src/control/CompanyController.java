@@ -14,6 +14,10 @@ import entity.MenuItem;
 import entity.MenuCategory;
 
 public class CompanyController {
+    /**
+     * loadBranch() Loads the list of branches in the excel sheet into the company's databse
+     * @return void.
+     */
 
     private static void loadBranch(){
         // read data from branch_list.xlsx
@@ -29,6 +33,10 @@ public class CompanyController {
         Company.setBranch(branches);
     }
 
+    /**
+     * loadStaff() Loads the list of staffs in the excel sheet into the company's branch databse
+     * @return void.
+     */
     private static void loadStaff(){
         // read data from staff_list.xlsx
         ArrayList<Object[]> staffRead = ExcelRW.readFile("data/default_staff_list.xlsx", 6);
@@ -71,6 +79,10 @@ public class CompanyController {
         }
     }
 
+     /**
+     * loadMenu() Loads the list of menu items in the excel sheet into the company's branch databse
+     * @return void.
+     */
     private static void loadMenu(){
         // read data from menu_list.xlsx
         ArrayList<Object[]> menuRead = ExcelRW.readFile("data/default_menu_list.xlsx", 4);
@@ -121,14 +133,20 @@ public class CompanyController {
         }
     }
 
-    // call Company.initialise() to initialise the database
+     /**
+     * initialise() Loads the excel files containing the list of branches, staffs, and menu items into the company's database
+     * @return void.
+     */
     public static void initialise(){
         loadBranch();    
         loadStaff();
         loadMenu();
     }
-
-    // Display list of branches in the company
+    
+/**
+     * displayBranch() Displays the list of branches in the company's database
+     * @return void.
+     */
     public static void displayBranch() {
     	
     	HashMap<String, Branch> branchList = Company.getBranch();
